@@ -9,7 +9,7 @@ export function Hero({ dotsRef }) {
       <div className="hero-sparkles" />
       <div className="hero-inner">
         <div className="hero-left">
-          <div className="hero-badge">SMARTER CONNECTS · STRONGER IMPACT</div>
+          <div className="hero-badge">SMARTER CONNECTS • STRONGER IMPACT</div>
           <h1 className="hero-h1">ONE TAP.<span className="accent">INFINITE</span>POSSIBILITIES.</h1>
           <p className="hero-p">
             Techno Biz Connect brings your professional identity to life with smart <strong>NFC technology.</strong>{" "}

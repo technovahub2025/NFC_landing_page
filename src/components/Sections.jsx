@@ -143,9 +143,9 @@ export function ContactSection() {
 export function Footer() {
   return (
     <footer>
-      <div className="footer-brand">TECHNOVA HUB<span>Empowering Minds · © 2025 Technova Hub. All rights reserved.</span></div>
+      <div className="footer-brand">TECHNOVA HUB<span>Empowering Minds • © 2025 Technova Hub. All rights reserved.</span></div>
       <div className="footer-copy">Built with ❤️ for smart professionals</div>
-      <div className="footer-tag">TAP · CONNECT · GROW</div>
+      <div className="footer-tag">TAP • CONNECT • GROW</div>
     </footer>
   );
 }

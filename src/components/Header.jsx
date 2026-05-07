@@ -11,7 +11,7 @@ export function Header({ isMenuOpen, navRef, onMenuToggle, onThemeToggle }) {
             <img className="nav-logo-img nav-logo-img-light" src={lightLogo} alt="Techno Biz Connect" />
             <img className="nav-logo-img nav-logo-img-dark" src={darkLogo} alt="Techno Biz Connect" />
           </div>
-          <div className="logo-text">TECHNO BIZ CONNECT<span>TAP · CONNECT · GROW</span></div>
+          <div className="logo-text">TECHNO BIZ CONNECT<span>TAP • CONNECT • GROW</span></div>
         </div>
         <ul className="nav-links">
           {navItems.map(([href, label]) => (

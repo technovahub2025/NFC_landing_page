@@ -17,7 +17,7 @@ export function LogoMark({ compact = false }) {
         <CardLogoImages />
       </div>
       <div className={compact ? "card-brand" : "logo-text"}>
-        TECHNO BIZ CONNECT<span>TAP · CONNECT · GROW</span>
+        TECHNO BIZ CONNECT<span>TAP • CONNECT • GROW</span>
       </div>
     </>
   );
@@ -32,10 +32,10 @@ export function ProductCard({ large = false }) {
           <div className="big-card-badge">
             <CardLogoImages />
           </div>
-          <div className="big-card-brand">TECHNO BIZ CONNECT<span>TAP · CONNECT · GROW</span></div>
+          <div className="big-card-brand">TECHNO BIZ CONNECT<span>TAP • CONNECT • GROW</span></div>
         </div>
         <div className="big-card-name">TECHNO BIZ CONNECT</div>
-        <div className="big-card-sub">TAP · CONNECT · GROW · SMARTER NETWORKING</div>
+        <div className="big-card-sub">TAP • CONNECT • GROW • SMARTER NETWORKING</div>
         <div className="big-card-nfc">
           <div className="nfc-rings"><div className="nfc-icon">📶</div></div>
         </div>
@@ -50,7 +50,7 @@ export function ProductCard({ large = false }) {
         <LogoMark compact />
       </div>
       <div className="card-main-name">TECHNO BIZ CONNECT</div>
-      <div className="card-tagline">TAP · CONNECT · GROW · SMARTER NETWORKING</div>
+      <div className="card-tagline">TAP • CONNECT • GROW • SMARTER NETWORKING</div>
       <div className="card-nfc" />
     </div>
   );
