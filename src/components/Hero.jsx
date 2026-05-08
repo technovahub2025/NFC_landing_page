@@ -22,11 +22,7 @@ export function Hero({ dotsRef }) {
         </div>
         <div className="hero-visual">
           <div className="hero-card-frame">
-            <ProductCard />
-            <div className="tap-label">
-              <div className="tap-line" />
-              TAP HERE<br />TO CONNECT
-            </div>
+            <ProductCard showTapLabel />
             <div className="phone-mockup">
               <img className="phone-mockup-img" src={image2Phone} alt="NFC contact preview" />
             </div>

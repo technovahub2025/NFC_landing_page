@@ -17,12 +17,12 @@ export function useLandingInteractions() {
     const canUseCustomCursor = window.matchMedia("(pointer: fine)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!dot || !ring || !canUseCustomCursor) return undefined;
 
-    let mx = 0;
-    let my = 0;
-    let dx = 0;
-    let dy = 0;
-    let rx = 0;
-    let ry = 0;
+    let mx = window.innerWidth / 2;
+    let my = window.innerHeight / 2;
+    let dx = mx;
+    let dy = my;
+    let rx = mx;
+    let ry = my;
     let frameId = 0;
 
     const handlePointerMove = (event) => {
@@ -31,16 +31,16 @@ export function useLandingInteractions() {
     };
 
     const animateCursor = () => {
-      dx += (mx - dx) * 0.45;
-      dy += (my - dy) * 0.45;
-      rx += (mx - rx) * 0.14;
-      ry += (my - ry) * 0.14;
+      dx += (mx - dx) * 0.38;
+      dy += (my - dy) * 0.38;
+      rx += (mx - rx) * 0.16;
+      ry += (my - ry) * 0.16;
       dot.style.transform = `translate3d(${dx}px,${dy}px,0) translate(-50%,-50%)`;
       ring.style.transform = `translate3d(${rx}px,${ry}px,0) translate(-50%,-50%)`;
       frameId = requestAnimationFrame(animateCursor);
     };
 
-    const interactiveSelector = "a,button,.why-card,.forwho-card,.feature-item,.tag,.card-mockup,.big-card,.contact-card";
+    const interactiveSelector = "a,button,.theme-toggle,.nav-hamburger,.mobile-menu a,.why-card,.forwho-card,.feature-item,.tag,.card-mockup,.big-card,.contact-card";
     const updateHoverState = (event) => {
       document.body.classList.toggle("cursor-hover", Boolean(event.target.closest(interactiveSelector)));
     };
@@ -67,19 +67,24 @@ export function useLandingInteractions() {
   }, []);
 
   useEffect(() => {
+    const revealChildren = (target) => {
+      const siblings = [...target.parentElement.querySelectorAll(".why-card,.forwho-card,.feature-item")];
+      siblings.forEach((sibling, index) => {
+        window.setTimeout(() => sibling.classList.add("visible"), index * 70);
+      });
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
 
           entry.target.classList.add("visible");
-          const siblings = [...entry.target.parentElement.querySelectorAll(".why-card,.forwho-card,.feature-item")];
-          siblings.forEach((sibling, index) => {
-            window.setTimeout(() => sibling.classList.add("visible"), index * 80);
-          });
+          revealChildren(entry.target);
+          observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.15 }
+      { rootMargin: "0px 0px -12% 0px", threshold: 0.12 }
     );
 
     const elements = document.querySelectorAll(
@@ -125,33 +130,59 @@ export function useLandingInteractions() {
   }, []);
 
   useEffect(() => {
+    let frameId = 0;
+    let lastScrolled = false;
+
     const handleScroll = () => {
-      if (navRef.current) {
-        navRef.current.style.boxShadow = window.scrollY > 30 ? "0 4px 30px rgba(0,0,0,0.12)" : "none";
-      }
+      if (frameId) return;
+      frameId = requestAnimationFrame(() => {
+        const isScrolled = window.scrollY > 30;
+        if (navRef.current && isScrolled !== lastScrolled) {
+          navRef.current.style.boxShadow = isScrolled ? "0 4px 30px rgba(0,0,0,0.12)" : "none";
+          lastScrolled = isScrolled;
+        }
+        frameId = 0;
+      });
     };
 
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      cancelAnimationFrame(frameId);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   useEffect(() => {
+    const canUsePointerEffects = window.matchMedia("(pointer: fine)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!canUsePointerEffects) return undefined;
+
+    let frameId = 0;
+    let nextTransform = "";
+
     const handleMouseMove = (event) => {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      const x = (event.clientX / window.innerWidth - 0.5) * 20;
-      const y = (event.clientY / window.innerHeight - 0.5) * 20;
-      if (heroDotsRef.current) {
-        heroDotsRef.current.style.transform = `translate(${x * 0.3}px,${y * 0.3}px)`;
-      }
+      const x = (event.clientX / window.innerWidth - 0.5) * 12;
+      const y = (event.clientY / window.innerHeight - 0.5) * 12;
+      nextTransform = `translate3d(${x * 0.3}px,${y * 0.3}px,0)`;
+      if (frameId) return;
+      frameId = requestAnimationFrame(() => {
+        if (heroDotsRef.current) {
+          heroDotsRef.current.style.transform = nextTransform;
+        }
+        frameId = 0;
+      });
     };
 
-    document.addEventListener("mousemove", handleMouseMove);
-    return () => document.removeEventListener("mousemove", handleMouseMove);
+    document.addEventListener("pointermove", handleMouseMove, { passive: true });
+    return () => {
+      cancelAnimationFrame(frameId);
+      document.removeEventListener("pointermove", handleMouseMove);
+    };
   }, []);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+    const canUseTilt = window.matchMedia("(pointer: fine)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!canUseTilt) return undefined;
 
     const tiltTargets = document.querySelectorAll(".card-mockup,.big-card,.features-img");
     const handleTilt = (event) => {

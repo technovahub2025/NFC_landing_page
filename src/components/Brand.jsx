@@ -23,7 +23,7 @@ export function LogoMark({ compact = false }) {
   );
 }
 
-export function ProductCard({ large = false }) {
+export function ProductCard({ large = false, showTapLabel = false }) {
   if (large) {
     return (
       <div className="big-card">
@@ -44,7 +44,7 @@ export function ProductCard({ large = false }) {
   }
 
   return (
-    <div className="card-mockup">
+    <div className={showTapLabel ? "card-mockup has-tap-label" : "card-mockup"}>
       <div className="card-shine" />
       <div className="card-logo-area">
         <LogoMark compact />
@@ -52,6 +52,12 @@ export function ProductCard({ large = false }) {
       <div className="card-main-name">TECHNO BIZ CONNECT</div>
       <div className="card-tagline">TAP • CONNECT • GROW • SMARTER NETWORKING</div>
       <div className="card-nfc" />
+      {showTapLabel ? (
+        <div className="tap-label">
+          <div className="tap-line" />
+          TAP HERE<br />TO CONNECT
+        </div>
+      ) : null}
     </div>
   );
 }
