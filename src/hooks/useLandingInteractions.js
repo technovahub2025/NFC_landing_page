@@ -8,7 +8,7 @@ export function useLandingInteractions() {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("tbc-theme");
-    document.documentElement.dataset.theme = savedTheme || "light";
+    document.documentElement.dataset.theme = savedTheme === "light" || savedTheme === "dark" ? savedTheme : "dark";
   }, []);
 
   useEffect(() => {
