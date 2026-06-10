@@ -4,7 +4,7 @@ import { buildSystemPrompt, parseChips, stripChips, needsPricing, needsCourses }
 import { sfx } from '../utils/audio.js'
 
 /**
- * useGemini — encapsulates all Gemini API logic via the backend proxy.
+ * useGemini â€” encapsulates all Gemini API logic via the backend proxy.
  * Returns { streaming, loading, sendToGemini }
  */
 export function useGemini({ messages, setMessages, lang, intent, frustrated, userName, userCtx, tts, speak, resetInact, sessionId }) {
@@ -179,10 +179,10 @@ export function useGemini({ messages, setMessages, lang, intent, frustrated, use
             time: new Date().toISOString(),
           }])
         } else if (isAbort) {
-          // User navigated away or new request — silently ignore
+          // User navigated away or new request â€” silently ignore
           return
         } else if (!retried) {
-          // Network failure — auto-retry once after 2 seconds
+          // Network failure â€” auto-retry once after 2 seconds
           retried = true
           setStreaming('Retrying...')
           await new Promise(r => setTimeout(r, 2000))
@@ -191,7 +191,7 @@ export function useGemini({ messages, setMessages, lang, intent, frustrated, use
           // Second failure
           setMessages(prev => [...prev, {
             role: 'assistant',
-            content: 'Connection issue � check your internet and try again.\n\nOr reach us directly:\n?? +91 9629600230\n?? technovahubcareer@gmail.com',
+            content: 'Connection issue — check your internet and try again.\n\nOr reach us directly:\n?? +91 9629600230\n?? technovahubcareer@gmail.com',
             chips: ['Retry', 'Contact support'],
             time: new Date().toISOString(),
           }])
