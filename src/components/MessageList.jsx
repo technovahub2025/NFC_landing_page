@@ -4,7 +4,7 @@ import { sanitize } from '../utils/sanitize.js'
 import { fmtTime } from '../utils/chatUtils.js'
 import PricingCards from './PricingCards.jsx'
 import CourseCards from './CourseCards.jsx'
-import logo from '../../server/technovalogo.png'
+import logo from '../assets/technovalogo.png'
 
 const MessageList = forwardRef(function MessageList({
   messages, streaming, loading, hlText, sendRef, resetInact, showLead, leadDone,

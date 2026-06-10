@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect, useRef, useCallback } from 'react'
-import logo from '../../server/technovalogo.png'
+import logo from '../assets/technovalogo.png'
 import { TVH_STATS, TVH_CLIENTS, TVH_PARTNERS, CONTACT } from '../data/company.js'
 
 // ─── LAYERED STAR FIELD (3 depth layers) ────────────────────────────────────

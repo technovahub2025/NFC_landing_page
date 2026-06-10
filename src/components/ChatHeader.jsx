@@ -12,7 +12,7 @@ import {
   SunMedium,
   Laptop,
 } from 'lucide-react'
-import logo from '../../server/technovalogo.png'
+import logo from '../assets/technovalogo.png'
 
 export default function ChatHeader({
   onSearchToggle, onExport, tts, hasTts, onTtsToggle, themeMode, onCycleTheme,
