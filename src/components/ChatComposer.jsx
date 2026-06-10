@@ -1,6 +1,6 @@
 import React from 'react'
 import { Paperclip, Mic, SendHorizontal } from 'lucide-react'
-import logo from '../../server/technovalogo.png'
+import logo from '../assets/technovalogo.png'
 
 export default function ChatComposer({
   lang, onSwitchLang, input, onInputChange, onKeyDown, onSend, onStartVoice, onStopVoice,
