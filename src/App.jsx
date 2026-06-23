@@ -1,7 +1,11 @@
 import { LandingPage } from "./pages/LandingPage.jsx";
 
 function App() {
-  return <LandingPage />;
+  return (
+    <>
+      <LandingPage />
+    </>
+  );
 }
 
 export default App;
